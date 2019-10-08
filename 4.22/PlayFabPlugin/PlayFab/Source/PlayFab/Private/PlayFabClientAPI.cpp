@@ -3823,7 +3823,7 @@ void UPlayFabClientAPI::HelperLoginWithGameCenter(FPlayFabBaseModel response, UO
 }
 
 /** Signs the user in using their Google account credentials */
-UPlayFabClientAPI* UPlayFabClientAPI::LoginWithGoogleAccount(FClientLoginWithGoogleAccountRequest request,
+UPlayFabClientAPI* UPlayFabClientAPI::LoginWithGoogleAccount(FClientLoginWithGoogleAccountRequest request, FString AccessToken,
     FDelegateOnSuccessLoginWithGoogleAccount onSuccess,
     FDelegateOnFailurePlayFabError onFailure,
     UObject* customData)
@@ -3847,6 +3847,11 @@ UPlayFabClientAPI* UPlayFabClientAPI::LoginWithGoogleAccount(FClientLoginWithGoo
 
     // Serialize all the request properties to json
     OutRestJsonObj->SetBoolField(TEXT("CreateAccount"), request.CreateAccount);
+    if (AccessToken.IsEmpty() || AccessToken == "") {
+        OutRestJsonObj->SetFieldNull(TEXT("AccessToken"));
+    } else {
+        OutRestJsonObj->SetStringField(TEXT("AccessToken"), AccessToken);
+    }
     if (request.EncryptedRequest.IsEmpty() || request.EncryptedRequest == "") {
         OutRestJsonObj->SetFieldNull(TEXT("EncryptedRequest"));
     } else {

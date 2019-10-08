@@ -1016,7 +1016,7 @@ public:
 
     /** Signs the user in using their Google account credentials */
     UFUNCTION(BlueprintCallable, Category = "PlayFab | Client | Authentication ", meta = (BlueprintInternalUseOnly = "true"))
-        static UPlayFabClientAPI* LoginWithGoogleAccount(FClientLoginWithGoogleAccountRequest request,
+        static UPlayFabClientAPI* LoginWithGoogleAccount(FClientLoginWithGoogleAccountRequest request, FString AccessToken,
             FDelegateOnSuccessLoginWithGoogleAccount onSuccess,
             FDelegateOnFailurePlayFabError onFailure, UObject* customData);
 
