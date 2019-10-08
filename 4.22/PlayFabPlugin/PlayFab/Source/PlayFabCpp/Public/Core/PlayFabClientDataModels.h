@@ -9380,6 +9380,11 @@ namespace ClientModels
          */
         FString TitleId;
 
+        /**
+         * [optional] Access token for the player account obtained on the client via the Online Subsystem Google plugin.
+         */
+        FString AccessToken;
+
         FLoginWithGoogleAccountRequest() :
             FPlayFabCppRequestCommon(),
             CreateAccount(),
@@ -9387,7 +9392,8 @@ namespace ClientModels
             InfoRequestParameters(nullptr),
             PlayerSecret(),
             ServerAuthCode(),
-            TitleId()
+            TitleId(),
+            AccessToken()
             {}
 
         FLoginWithGoogleAccountRequest(const FLoginWithGoogleAccountRequest& src) :
@@ -9397,7 +9403,8 @@ namespace ClientModels
             InfoRequestParameters(src.InfoRequestParameters.IsValid() ? MakeShareable(new FGetPlayerCombinedInfoRequestParams(*src.InfoRequestParameters)) : nullptr),
             PlayerSecret(src.PlayerSecret),
             ServerAuthCode(src.ServerAuthCode),
-            TitleId(src.TitleId)
+            TitleId(src.TitleId),
+            AccessToken(src.AccessToken)
             {}
 
         FLoginWithGoogleAccountRequest(const TSharedPtr<FJsonObject>& obj) : FLoginWithGoogleAccountRequest()

@@ -13063,6 +13063,8 @@ void PlayFab::ClientModels::FLoginWithGoogleAccountRequest::writeJSON(JsonWriter
 
     writer->WriteIdentifierPrefix(TEXT("TitleId")); writer->WriteValue(TitleId);
 
+    if (AccessToken.IsEmpty() == false) { writer->WriteIdentifierPrefix(TEXT("AccessToken")); writer->WriteValue(AccessToken); }
+
     writer->WriteObjectEnd();
 }
 
@@ -13109,6 +13111,13 @@ bool PlayFab::ClientModels::FLoginWithGoogleAccountRequest::readFromValue(const 
     {
         FString TmpValue;
         if (TitleIdValue->TryGetString(TmpValue)) { TitleId = TmpValue; }
+    }
+
+    const TSharedPtr<FJsonValue> AccessTokenValue = obj->TryGetField(TEXT("AccessToken"));
+    if (AccessTokenValue.IsValid() && !AccessTokenValue->IsNull())
+    {
+        FString TmpValue;
+        if (AccessTokenValue->TryGetString(TmpValue)) { AccessToken = TmpValue; }
     }
 
     return HasSucceeded;
